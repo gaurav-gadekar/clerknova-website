@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ClerkNova — AI Sales & Support Employee for E-commerce</title>
+<meta name="description" content="ClerkNova is an AI sales and support agent for online stores: it sells in chat, answers WhatsApp, takes phone calls, recovers carts, and shows the profit it makes.">
+<style>
+  :root {
+    --green: #1a7f5a; --green-dark: #146547; --green-soft: #e7f4ee;
+    --ink: #1c2420; --muted: #5b6862; --line: #e3e8e5; --bg: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 22px; }
+  header { border-bottom: 1px solid var(--line); }
+  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
+  .logo { font-size: 20px; font-weight: 800; color: var(--green); letter-spacing: -.02em; text-decoration: none; }
+  nav .links a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 14.5px; }
+  nav .links a:hover { color: var(--green); }
+
+  .hero { padding: 76px 0 64px; text-align: center; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.12; margin: 0 auto 16px; max-width: 17ch; letter-spacing: -.02em; }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero p { color: var(--muted); max-width: 56ch; margin: 0 auto 28px; font-size: 17.5px; }
+  .cta { display: inline-block; background: var(--green); color: #fff; text-decoration: none; font-weight: 600; padding: 13px 26px; border-radius: 9px; }
+  .cta:hover { background: var(--green-dark); }
+  .cta-sub { display: block; margin-top: 12px; color: var(--muted); font-size: 13.5px; }
+
+  .band { background: var(--green-soft); padding: 14px 0; text-align: center; color: var(--green-dark); font-size: 14.5px; font-weight: 600; }
+
+  section { padding: 64px 0; }
+  section h2 { font-size: 26px; margin: 0 0 8px; letter-spacing: -.015em; text-align: center; }
+  .sub { color: var(--muted); text-align: center; margin: 0 auto 40px; max-width: 60ch; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .card .ico { font-size: 22px; }
+  .card h3 { margin: 10px 0 6px; font-size: 16.5px; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  .steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+  .step { border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+  .step::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center;
+    width: 30px; height: 30px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; }
+  .step h3 { margin: 12px 0 6px; font-size: 16px; }
+  .step p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+  .about { background: #f7f9f8; }
+  .about .inner { max-width: 640px; margin: 0 auto; text-align: center; }
+  .about p { color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 40px; font-size: 14px; color: var(--muted); }
+  footer .cols { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
+  footer a { color: var(--muted); margin-right: 16px; }
+  @media (max-width: 560px) { nav .links a { margin-left: 12px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="/">ClerkNova</a>
+      <span class="links">
+        <a href="#features">Features</a>
+        <a href="#how">How it works</a>
+        <a href="#about">About</a>
+        <a href="mailto:support@clerknova.com">Contact</a>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>The AI employee that <em>sells, supports, and answers the phone</em> for your store</h1>
+    <p>ClerkNova plugs into your Shopify store and works every channel your customers use —
+       website chat, WhatsApp, and real phone calls. It recommends products, closes sales
+       with secure checkout links, handles returns by your policy, and escalates to your
+       team only when a human is truly needed.</p>
+    <a class="cta" href="mailto:support@clerknova.com?subject=ClerkNova%20Early%20Access">Request early access</a>
+    <span class="cta-sub">Currently onboarding early partner stores.</span>
+  </div>
+</div>
+
+<div class="band">Sell while you sleep — one AI agent across chat, WhatsApp &amp; voice, with a profit dashboard to prove it.</div>
+
+<section id="features">
+  <div class="wrap">
+    <h2>Everything a great store employee does</h2>
+    <p class="sub">Not a chatbot with canned answers — an agent that takes real actions on your store.</p>
+    <div class="grid">
+      <div class="card"><div class="ico">🛍️</div><h3>AI sales chat on your storefront</h3>
+        <p>Understands what shoppers need, recommends the right products with swipeable cards, and creates secure checkout links — the whole sale happens in chat.</p></div>
+      <div class="card"><div class="ico">💬</div><h3>WhatsApp storefront</h3>
+        <p>Your catalog synced to WhatsApp automatically. Customers browse tappable product cards, order in the conversation, and get payment links instantly.</p></div>
+      <div class="card"><div class="ico">📞</div><h3>A voice that answers calls</h3>
+        <p>Human-like phone support built on a real-time voice engine: callers browse, buy, and get help — with polite interruption handling, like talking to a person.</p></div>
+      <div class="card"><div class="ico">↩️</div><h3>Returns done by the book</h3>
+        <p>Checks the real order, delivery status, and your return window before acting — then registers the request on the Shopify order itself and notifies your team.</p></div>
+      <div class="card"><div class="ico">📈</div><h3>Profit intelligence</h3>
+        <p>Net profit, cost leakage, marketing ROAS, and inventory risk on one dashboard — including the revenue your AI closed for you.</p></div>
+      <div class="card"><div class="ico">🧲</div><h3>Leads &amp; recovery on autopilot</h3>
+        <p>Politely captures emails and WhatsApp numbers, wins back abandoned carts, and sends campaigns to customers who opted in.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <h2>Live on your store in minutes</h2>
+    <p class="sub">No code. No flows to build. No scripts to write.</p>
+    <div class="steps">
+      <div class="step"><h3>Install &amp; connect</h3><p>Add ClerkNova from the Shopify admin and toggle the chat widget on in your theme. Products and policies sync automatically.</p></div>
+      <div class="step"><h3>Connect WhatsApp</h3><p>One click, log in with Facebook, pick your business number — catalog, webhooks and tokens configure themselves.</p></div>
+      <div class="step"><h3>Set your rules</h3><p>Return window, support phone, escalation preferences. The AI follows your policy — and hands off to humans when you want it to.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap"><div class="inner">
+    <h2>About ClerkNova</h2>
+    <p>ClerkNova is conversational-commerce software built for independent e-commerce brands.
+       Our mission is simple: give every store the always-on sales and support team that only
+       the biggest retailers could afford — at a price any store can.</p>
+    <p>Questions, partnerships, or press: <a href="mailto:support@clerknova.com" style="color:var(--green)">support@clerknova.com</a></p>
+  </div></div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <span>© 2026 ClerkNova. All rights reserved.</span>
+      <span>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="mailto:support@clerknova.com">support@clerknova.com</a>
+      </span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
