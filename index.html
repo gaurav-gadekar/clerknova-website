@@ -3,142 +3,251 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ClerkNova — AI Sales & Support Employee for E-commerce</title>
-<meta name="description" content="ClerkNova is an AI sales and support agent for online stores: it sells in chat, answers WhatsApp, takes phone calls, recovers carts, and shows the profit it makes.">
+<title>ClerkNova — The AI employee that sells, supports & answers the phone</title>
+<meta name="description" content="ClerkNova is an AI sales and support agent for online stores. It sells in chat, runs your WhatsApp, answers phone calls, recovers carts, and shows the profit it makes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
   :root {
-    --green: #1a7f5a; --green-dark: #146547; --green-soft: #e7f4ee;
-    --ink: #1c2420; --muted: #5b6862; --line: #e3e8e5; --bg: #ffffff;
+    --copper: #b9895b; --copper-lite: #d1a479; --copper-deep: #9a6f45;
+    --ink: #16130f; --char: #211c17; --char-2: #2c2620;
+    --cream: #f6f1e9; --cream-2: #efe7db; --paper: #fffdfa;
+    --muted-d: #b9ad9d; --muted-l: #6b6156; --line-d: #362f28; --line-l: #e4d9c9;
+    --font: 'Sora', ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   }
   * { box-sizing: border-box; }
-  body { margin: 0; font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
-  .wrap { max-width: 1020px; margin: 0 auto; padding: 0 22px; }
-  header { border-bottom: 1px solid var(--line); }
-  nav { display: flex; align-items: center; justify-content: space-between; padding: 18px 0; }
-  .logo { font-size: 20px; font-weight: 800; color: var(--green); letter-spacing: -.02em; text-decoration: none; }
-  nav .links a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 14.5px; }
-  nav .links a:hover { color: var(--green); }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: var(--font); color: var(--ink); background: var(--paper); -webkit-font-smoothing: antialiased; }
+  .wrap { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+  .mark { width: 1em; height: 1em; display: inline-block; vertical-align: -0.15em; }
 
-  .hero { padding: 76px 0 64px; text-align: center; }
-  .hero h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.12; margin: 0 auto 16px; max-width: 17ch; letter-spacing: -.02em; }
-  .hero h1 em { color: var(--green); font-style: normal; }
-  .hero p { color: var(--muted); max-width: 56ch; margin: 0 auto 28px; font-size: 17.5px; }
-  .cta { display: inline-block; background: var(--green); color: #fff; text-decoration: none; font-weight: 600; padding: 13px 26px; border-radius: 9px; }
-  .cta:hover { background: var(--green-dark); }
-  .cta-sub { display: block; margin-top: 12px; color: var(--muted); font-size: 13.5px; }
+  /* NAV */
+  header { position: sticky; top: 0; z-index: 50; background: rgba(22,19,15,.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line-d); }
+  nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--cream); font-weight: 700; font-size: 20px; letter-spacing: -.02em; }
+  .brand .mark { color: var(--copper); font-size: 30px; }
+  .navlinks { display: flex; align-items: center; gap: 30px; }
+  .navlinks a { color: var(--muted-d); text-decoration: none; font-size: 14.5px; font-weight: 500; }
+  .navlinks a:hover { color: var(--cream); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-weight: 600; font-size: 14.5px; text-decoration: none; border-radius: 10px; padding: 11px 20px; cursor: pointer; border: none; transition: transform .12s ease, background .2s ease; }
+  .btn-primary { background: var(--copper); color: #1a120a; }
+  .btn-primary:hover { background: var(--copper-lite); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--cream); border: 1px solid var(--line-d); }
+  .btn-ghost:hover { border-color: var(--copper); color: var(--copper-lite); }
+  @media (max-width: 720px) { .navlinks .navlink { display: none; } }
 
-  .band { background: var(--green-soft); padding: 14px 0; text-align: center; color: var(--green-dark); font-size: 14.5px; font-weight: 600; }
+  /* HERO */
+  .hero { position: relative; background: radial-gradient(120% 90% at 50% -10%, #2a2118 0%, var(--ink) 55%); color: var(--cream); overflow: hidden; }
+  .hero .glow { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; opacity: .16; }
+  .hero .glow .mark { color: var(--copper); font-size: min(92vw, 760px); animation: spin 120s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .hero .glow .mark { animation: none; } }
+  .hero-inner { position: relative; text-align: center; padding: 92px 0 104px; }
+  .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: .04em; color: var(--copper-lite); background: rgba(185,137,91,.12); border: 1px solid rgba(185,137,91,.28); padding: 7px 15px; border-radius: 999px; }
+  .hero h1 { font-size: clamp(34px, 6vw, 62px); line-height: 1.06; letter-spacing: -.03em; font-weight: 800; margin: 26px auto 20px; max-width: 15ch; text-wrap: balance; }
+  .hero h1 .accent { color: var(--copper-lite); }
+  .hero p.lede { color: var(--muted-d); font-size: clamp(16px, 2vw, 19px); max-width: 58ch; margin: 0 auto 34px; line-height: 1.6; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .hero-note { margin-top: 18px; color: #8a7f70; font-size: 13.5px; }
 
-  section { padding: 64px 0; }
-  section h2 { font-size: 26px; margin: 0 0 8px; letter-spacing: -.015em; text-align: center; }
-  .sub { color: var(--muted); text-align: center; margin: 0 auto 40px; max-width: 60ch; }
+  /* CHANNEL STRIP */
+  .channels { border-top: 1px solid var(--line-d); background: var(--char); color: var(--muted-d); }
+  .channels .wrap { display: flex; align-items: center; justify-content: center; gap: 12px 40px; flex-wrap: wrap; padding: 22px 24px; }
+  .channels span { font-size: 14px; font-weight: 500; letter-spacing: .01em; display: inline-flex; align-items: center; gap: 9px; }
+  .channels b { color: var(--copper-lite); }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
-  .card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-  .card .ico { font-size: 22px; }
-  .card h3 { margin: 10px 0 6px; font-size: 16.5px; }
-  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  /* SECTIONS */
+  section.light { background: var(--paper); color: var(--ink); }
+  section.cream { background: var(--cream); color: var(--ink); }
+  .sec { padding: 92px 0; }
+  .sec-head { max-width: 640px; margin: 0 auto 52px; text-align: center; }
+  .kicker { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--copper-deep); }
+  .sec-head h2 { font-size: clamp(26px, 3.6vw, 38px); letter-spacing: -.02em; font-weight: 700; margin: 12px 0 12px; text-wrap: balance; }
+  .sec-head p { color: var(--muted-l); font-size: 17px; margin: 0; line-height: 1.6; }
 
-  .steps { counter-reset: s; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-  .step { border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
-  .step::before { counter-increment: s; content: counter(s); display: inline-grid; place-items: center;
-    width: 30px; height: 30px; border-radius: 50%; background: var(--green); color: #fff; font-weight: 700; }
-  .step h3 { margin: 12px 0 6px; font-size: 16px; }
-  .step p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  /* FEATURE GRID */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .fcard { background: var(--paper); border: 1px solid var(--line-l); border-radius: 16px; padding: 26px; transition: border-color .2s ease, transform .2s ease; }
+  .fcard:hover { border-color: var(--copper); transform: translateY(-3px); }
+  .fcard .ic { width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; background: linear-gradient(150deg, var(--copper) 0%, var(--copper-deep) 100%); color: #fff; font-size: 21px; }
+  .fcard h3 { font-size: 18px; font-weight: 600; margin: 18px 0 8px; letter-spacing: -.01em; }
+  .fcard p { margin: 0; color: var(--muted-l); font-size: 14.6px; line-height: 1.62; }
 
-  .about { background: #f7f9f8; }
-  .about .inner { max-width: 640px; margin: 0 auto; text-align: center; }
-  .about p { color: var(--muted); }
+  /* SPLIT — the edge */
+  .split { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 36px; } }
+  .split h2 { font-size: clamp(26px, 3.4vw, 36px); letter-spacing: -.02em; margin: 10px 0 16px; font-weight: 700; text-wrap: balance; }
+  .split p { color: var(--muted-l); font-size: 16.5px; line-height: 1.65; }
+  .edge-list { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 14px; }
+  .edge-list li { display: flex; gap: 13px; align-items: flex-start; font-size: 15.5px; }
+  .edge-list .dot { flex: none; width: 22px; height: 22px; border-radius: 50%; background: var(--copper); color: #1a120a; display: grid; place-items: center; font-size: 13px; font-weight: 700; margin-top: 1px; }
+  .edge-list b { font-weight: 600; }
+  .panel { background: var(--char); border: 1px solid var(--line-d); border-radius: 20px; padding: 22px; color: var(--cream); }
+  .chatline { display: flex; margin: 9px 0; }
+  .bub { max-width: 82%; padding: 11px 15px; border-radius: 15px; font-size: 14px; line-height: 1.5; }
+  .bub.user { margin-left: auto; background: var(--copper); color: #1a120a; border-bottom-right-radius: 5px; }
+  .bub.bot { background: var(--char-2); color: var(--cream); border-bottom-left-radius: 5px; border: 1px solid var(--line-d); }
+  .panel .cards { display: flex; gap: 10px; margin-top: 8px; overflow-x: auto; }
+  .pcard { flex: none; width: 128px; background: var(--char-2); border: 1px solid var(--line-d); border-radius: 12px; overflow: hidden; }
+  .pcard .ph { height: 74px; background: linear-gradient(135deg, #3a3129, #4b3d2f); }
+  .pcard .meta { padding: 8px 10px; }
+  .pcard .t { font-size: 11.5px; color: var(--muted-d); }
+  .pcard .pr { font-size: 13px; font-weight: 700; color: var(--copper-lite); }
 
-  footer { border-top: 1px solid var(--line); padding: 30px 0 40px; font-size: 14px; color: var(--muted); }
-  footer .cols { display: flex; flex-wrap: wrap; gap: 18px; justify-content: space-between; align-items: center; }
-  footer a { color: var(--muted); margin-right: 16px; }
-  @media (max-width: 560px) { nav .links a { margin-left: 12px; } }
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; counter-reset: s; }
+  @media (max-width: 780px) { .steps { grid-template-columns: 1fr; } }
+  .step { border-left: 2px solid var(--copper); padding: 4px 0 4px 22px; }
+  .step .n { counter-increment: s; font-size: 13px; font-weight: 700; color: var(--copper-deep); letter-spacing: .08em; }
+  .step .n::before { content: "0" counter(s); }
+  .step h3 { font-size: 18px; margin: 8px 0 7px; font-weight: 600; }
+  .step p { margin: 0; color: var(--muted-l); font-size: 14.6px; line-height: 1.6; }
+
+  /* STATS */
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; text-align: center; }
+  @media (max-width: 720px) { .stats { grid-template-columns: repeat(2, 1fr); gap: 32px 16px; } }
+  .stat .v { font-size: clamp(30px, 4vw, 44px); font-weight: 800; letter-spacing: -.02em; color: var(--copper-lite); }
+  .stat .l { color: var(--muted-d); font-size: 14px; margin-top: 4px; }
+
+  /* CLOSING CTA */
+  .final { background: radial-gradient(130% 120% at 50% 0%, #2c2118 0%, var(--ink) 60%); color: var(--cream); text-align: center; }
+  .final .wrap { padding: 96px 24px; }
+  .final .mark { color: var(--copper); font-size: 56px; }
+  .final h2 { font-size: clamp(28px, 4.5vw, 46px); letter-spacing: -.02em; font-weight: 800; margin: 20px auto 14px; max-width: 18ch; text-wrap: balance; }
+  .final p { color: var(--muted-d); font-size: 17px; max-width: 48ch; margin: 0 auto 30px; }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: var(--muted-d); border-top: 1px solid var(--line-d); }
+  footer .wrap { padding: 40px 24px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
+  footer .brand { color: var(--cream); font-size: 18px; }
+  footer .brand .mark { font-size: 26px; }
+  footer .fl a { color: var(--muted-d); text-decoration: none; margin-left: 22px; font-size: 14px; }
+  footer .fl a:hover { color: var(--copper-lite); }
+  footer .cr { width: 100%; border-top: 1px solid var(--line-d); padding-top: 16px; font-size: 13px; color: #7c7264; }
+  @media (max-width: 560px) { footer .fl a { margin: 0 18px 0 0; } }
 </style>
 </head>
 <body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="mark" viewBox="0 0 200 200"><circle cx="92.3" cy="107.0" r="1.4"/><circle cx="101.3" cy="85.3" r="1.5"/><circle cx="111.0" cy="114.3" r="1.6"/><circle cx="79.5" cy="96.4" r="1.7"/><circle cx="119.6" cy="87.5" r="1.8"/><circle cx="93.4" cy="124.6" r="1.9"/><circle cx="87.3" cy="75.6" r="2.0"/><circle cx="127.6" cy="110.1" r="2.0"/><circle cx="71.2" cy="111.9" r="2.1"/><circle cx="113.9" cy="70.2" r="2.2"/><circle cx="110.3" cy="132.9" r="2.3"/><circle cx="68.8" cy="81.9" r="2.4"/><circle cx="136.6" cy="91.9" r="2.4"/><circle cx="77.6" cy="131.8" r="2.5"/><circle cx="94.8" cy="60.1" r="2.6"/><circle cx="131.8" cy="126.8" r="2.7"/><circle cx="57.2" cy="101.8" r="2.8"/><circle cx="131.3" cy="68.9" r="2.8"/><circle cx="97.9" cy="145.3" r="2.9"/><circle cx="70.2" cy="64.3" r="3.0"/><circle cx="147.2" cy="106.3" r="3.1"/><circle cx="60.0" cy="127.9" r="3.1"/><circle cx="110.9" cy="51.3" r="3.2"/><circle cx="125.3" cy="144.2" r="3.3"/><circle cx="50.5" cy="84.2" r="3.4"/><circle cx="148.1" cy="77.7" r="3.4"/><circle cx="79.2" cy="149.9" r="3.5"/><circle cx="81.4" cy="48.2" r="3.6"/><circle cx="149.6" cy="126.0" r="3.7"/><circle cx="44.9" cy="114.5" r="3.7"/><circle cx="131.3" cy="51.3" r="3.8"/><circle cx="110.0" cy="158.0" r="3.9"/><circle cx="52.7" cy="63.4" r="3.9"/><circle cx="160.4" cy="95.0" r="4.0"/><circle cx="58.2" cy="145.2" r="4.1"/><circle cx="100.3" cy="37.6" r="4.2"/><circle cx="142.5" cy="146.8" r="4.2"/><circle cx="36.2" cy="94.1" r="4.3"/><circle cx="151.7" cy="60.7" r="4.4"/><circle cx="88.3" cy="164.7" r="4.4"/><circle cx="64.5" cy="43.7" r="4.5"/><circle cx="165.0" cy="117.8" r="4.6"/><circle cx="39.3" cy="131.2" r="4.7"/><circle cx="123.9" cy="35.3" r="4.7"/><circle cx="126.3" cy="164.6" r="4.8"/><circle cx="36.2" cy="69.8" r="4.9"/><circle cx="168.1" cy="79.0" r="4.9"/><circle cx="63.6" cy="162.2" r="5.0"/><circle cx="84.7" cy="28.8" r="5.1"/><circle cx="160.0" cy="142.5" r="5.1"/><circle cx="26.3" cy="109.2" r="5.2"/><circle cx="148.6" cy="42.9" r="5.3"/><circle cx="102.8" cy="175.7" r="5.4"/><circle cx="46.3" cy="45.6" r="5.4"/><circle cx="177.0" cy="103.9" r="5.5"/><circle cx="40.0" cy="149.6" r="5.6"/><circle cx="110.8" cy="22.2" r="5.6"/><circle cx="145.0" cy="165.2" r="5.7"/></symbol></svg>
+
 <header>
-  <div class="wrap">
-    <nav>
-      <a class="logo" href="/">ClerkNova</a>
-      <span class="links">
-        <a href="#features">Features</a>
-        <a href="#how">How it works</a>
-        <a href="#about">About</a>
-        <a href="mailto:support@clerknova.com">Contact</a>
-      </span>
-    </nav>
-  </div>
+  <div class="wrap"><nav>
+    <a class="brand" href="/"><svg class="mark"><use href="#mark"/></svg>ClerkNova</a>
+    <span class="navlinks">
+      <a class="navlink" href="#features">Features</a>
+      <a class="navlink" href="#edge">Why ClerkNova</a>
+      <a class="navlink" href="#how">How it works</a>
+      <a class="btn btn-primary" href="mailto:support@clerknova.com?subject=ClerkNova%20Early%20Access">Request access</a>
+    </span>
+  </nav></div>
 </header>
 
-<div class="wrap">
-  <div class="hero">
-    <h1>The AI employee that <em>sells, supports, and answers the phone</em> for your store</h1>
-    <p>ClerkNova plugs into your Shopify store and works every channel your customers use —
-       website chat, WhatsApp, and real phone calls. It recommends products, closes sales
-       with secure checkout links, handles returns by your policy, and escalates to your
-       team only when a human is truly needed.</p>
-    <a class="cta" href="mailto:support@clerknova.com?subject=ClerkNova%20Early%20Access">Request early access</a>
-    <span class="cta-sub">Currently onboarding early partner stores.</span>
-  </div>
+<div class="hero">
+  <div class="glow"><svg class="mark"><use href="#mark"/></svg></div>
+  <div class="wrap"><div class="hero-inner">
+    <span class="eyebrow"><svg class="mark" style="font-size:15px"><use href="#mark"/></svg> AI Sales &amp; Support for E-commerce</span>
+    <h1>The AI employee that <span class="accent">sells, supports</span> &amp; answers the phone</h1>
+    <p class="lede">ClerkNova plugs into your Shopify store and works every channel your customers use — website chat, WhatsApp, and real phone calls. It recommends products, closes sales with secure checkout, handles returns by your policy, and hands off to your team only when a human is truly needed.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="mailto:support@clerknova.com?subject=ClerkNova%20Early%20Access">Request early access</a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="hero-note">Currently onboarding early partner stores · No code · Live in minutes</p>
+  </div></div>
 </div>
 
-<div class="band">Sell while you sleep — one AI agent across chat, WhatsApp &amp; voice, with a profit dashboard to prove it.</div>
+<div class="channels"><div class="wrap">
+  <span>Works across</span>
+  <span>💬 <b>Website chat</b></span>
+  <span>🟢 <b>WhatsApp</b></span>
+  <span>📞 <b>Phone calls</b></span>
+  <span>📈 <b>Profit dashboard</b></span>
+</div></div>
 
-<section id="features">
-  <div class="wrap">
+<section class="light" id="features"><div class="wrap sec">
+  <div class="sec-head">
+    <span class="kicker">What it does</span>
     <h2>Everything a great store employee does</h2>
-    <p class="sub">Not a chatbot with canned answers — an agent that takes real actions on your store.</p>
-    <div class="grid">
-      <div class="card"><div class="ico">🛍️</div><h3>AI sales chat on your storefront</h3>
-        <p>Understands what shoppers need, recommends the right products with swipeable cards, and creates secure checkout links — the whole sale happens in chat.</p></div>
-      <div class="card"><div class="ico">💬</div><h3>WhatsApp storefront</h3>
-        <p>Your catalog synced to WhatsApp automatically. Customers browse tappable product cards, order in the conversation, and get payment links instantly.</p></div>
-      <div class="card"><div class="ico">📞</div><h3>A voice that answers calls</h3>
-        <p>Human-like phone support built on a real-time voice engine: callers browse, buy, and get help — with polite interruption handling, like talking to a person.</p></div>
-      <div class="card"><div class="ico">↩️</div><h3>Returns done by the book</h3>
-        <p>Checks the real order, delivery status, and your return window before acting — then registers the request on the Shopify order itself and notifies your team.</p></div>
-      <div class="card"><div class="ico">📈</div><h3>Profit intelligence</h3>
-        <p>Net profit, cost leakage, marketing ROAS, and inventory risk on one dashboard — including the revenue your AI closed for you.</p></div>
-      <div class="card"><div class="ico">🧲</div><h3>Leads &amp; recovery on autopilot</h3>
-        <p>Politely captures emails and WhatsApp numbers, wins back abandoned carts, and sends campaigns to customers who opted in.</p></div>
+    <p>Not a chatbot with canned answers — an AI agent that takes real actions on your store, in your customers' own words.</p>
+  </div>
+  <div class="grid">
+    <div class="fcard"><div class="ic">🛍️</div><h3>Sells on your storefront</h3><p>Understands what shoppers need, recommends the right products with swipeable cards, and creates secure checkout links — the whole sale happens in chat.</p></div>
+    <div class="fcard"><div class="ic">🟢</div><h3>Runs your WhatsApp shop</h3><p>Your catalog syncs to WhatsApp automatically. Customers browse tappable product cards, order in the conversation, and get payment links instantly.</p></div>
+    <div class="fcard"><div class="ic">📞</div><h3>Answers the phone like a human</h3><p>Real-time voice support: callers browse, buy, and get help — with natural, polite interruption handling. No hold music, no menus.</p></div>
+    <div class="fcard"><div class="ic">↩️</div><h3>Handles returns by the book</h3><p>Checks the real order, delivery status, and your return window before acting — then registers the request on the Shopify order and alerts your team.</p></div>
+    <div class="fcard"><div class="ic">📈</div><h3>Shows the profit it makes</h3><p>Net profit, cost leakage, marketing ROAS, and inventory risk on one dashboard — including the revenue ClerkNova closed for you.</p></div>
+    <div class="fcard"><div class="ic">🧲</div><h3>Captures leads &amp; recovers carts</h3><p>Politely collects emails and WhatsApp numbers, wins back abandoned carts, and sends campaigns to customers who opted in.</p></div>
+  </div>
+</div></section>
+
+<section class="cream" id="edge"><div class="wrap sec">
+  <div class="split">
+    <div>
+      <span class="kicker">Why ClerkNova</span>
+      <h2>An AI store employee — not a chatbot that charges per answer</h2>
+      <p>Most AI chat tools bill you for every reply and stop at the website. ClerkNova works the whole shift, across every channel, and proves its value on a profit dashboard the others don't have.</p>
+      <ul class="edge-list">
+        <li><span class="dot">✓</span><span><b>Voice &amp; phone calls</b> — your store literally answers the phone. Most competitors have nothing here.</span></li>
+        <li><span class="dot">✓</span><span><b>Native WhatsApp commerce</b> — catalog synced, orders taken in the chat, not just a support inbox.</span></li>
+        <li><span class="dot">✓</span><span><b>Profit intelligence</b> — see real net profit and the revenue your AI closed, not vanity chat metrics.</span></li>
+        <li><span class="dot">✓</span><span><b>Acts on your real store</b> — creates orders, registers returns, respects your policies automatically.</span></li>
+      </ul>
+    </div>
+    <div class="panel" aria-hidden="true">
+      <div class="chatline"><div class="bub user">Do you have something for icy slopes, mid budget?</div></div>
+      <div class="chatline"><div class="bub bot">For icy conditions you'll want strong edge hold. The Hydrogen is our best mid-budget pick at $600 — reliable and top rated. Want to see it?</div></div>
+      <div class="cards">
+        <div class="pcard"><div class="ph"></div><div class="meta"><div class="t">Hydrogen Snowboard</div><div class="pr">$600.00</div></div></div>
+        <div class="pcard"><div class="ph"></div><div class="meta"><div class="t">Oxygen Snowboard</div><div class="pr">$1,025.00</div></div></div>
+      </div>
+      <div class="chatline" style="margin-top:12px"><div class="bub user">Perfect, I'll take it</div></div>
+      <div class="chatline"><div class="bub bot">Reserved! Complete your secure checkout here → <span style="color:var(--copper-lite)">checkout link</span> 🎉</div></div>
     </div>
   </div>
-</section>
+</div></section>
 
-<section id="how">
-  <div class="wrap">
+<section class="light" id="how"><div class="wrap sec">
+  <div class="sec-head">
+    <span class="kicker">Getting started</span>
     <h2>Live on your store in minutes</h2>
-    <p class="sub">No code. No flows to build. No scripts to write.</p>
-    <div class="steps">
-      <div class="step"><h3>Install &amp; connect</h3><p>Add ClerkNova from the Shopify admin and toggle the chat widget on in your theme. Products and policies sync automatically.</p></div>
-      <div class="step"><h3>Connect WhatsApp</h3><p>One click, log in with Facebook, pick your business number — catalog, webhooks and tokens configure themselves.</p></div>
-      <div class="step"><h3>Set your rules</h3><p>Return window, support phone, escalation preferences. The AI follows your policy — and hands off to humans when you want it to.</p></div>
-    </div>
+    <p>No code. No conversation flows to build. No scripts to write.</p>
   </div>
-</section>
-
-<section class="about" id="about">
-  <div class="wrap"><div class="inner">
-    <h2>About ClerkNova</h2>
-    <p>ClerkNova is conversational-commerce software built for independent e-commerce brands.
-       Our mission is simple: give every store the always-on sales and support team that only
-       the biggest retailers could afford — at a price any store can.</p>
-    <p>Questions, partnerships, or press: <a href="mailto:support@clerknova.com" style="color:var(--green)">support@clerknova.com</a></p>
-  </div></div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <div class="cols">
-      <span>© 2026 ClerkNova. All rights reserved.</span>
-      <span>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/terms.html">Terms of Service</a>
-        <a href="mailto:support@clerknova.com">support@clerknova.com</a>
-      </span>
-    </div>
+  <div class="steps">
+    <div class="step"><div class="n"></div><h3>Install &amp; connect</h3><p>Add ClerkNova from your Shopify admin and switch the widget on in your theme. Products and policies sync automatically.</p></div>
+    <div class="step"><div class="n"></div><h3>Connect WhatsApp</h3><p>One click, log in with Facebook, pick your business number — catalog, webhooks, and tokens configure themselves.</p></div>
+    <div class="step"><div class="n"></div><h3>Set your rules</h3><p>Return window, support phone, escalation preferences. ClerkNova follows your policy and hands off to humans on your terms.</p></div>
   </div>
-</footer>
+</div></section>
+
+<section class="cream"><div class="wrap sec">
+  <div class="stats">
+    <div class="stat"><div class="v">3</div><div class="l">channels, one AI brain</div></div>
+    <div class="stat"><div class="v">24/7</div><div class="l">always on the shift</div></div>
+    <div class="stat"><div class="v">&lt;5 min</div><div class="l">to go live</div></div>
+    <div class="stat"><div class="v">0</div><div class="l">flows to build by hand</div></div>
+  </div>
+</div></section>
+
+<div class="final"><div class="wrap">
+  <svg class="mark"><use href="#mark"/></svg>
+  <h2>Give every store the team only giants could afford</h2>
+  <p>ClerkNova sells, supports, and answers the phone — around the clock — so you don't have to be online to close the sale.</p>
+  <a class="btn btn-primary" href="mailto:support@clerknova.com?subject=ClerkNova%20Early%20Access">Request early access</a>
+</div></div>
+
+<footer><div class="wrap">
+  <a class="brand" href="/"><svg class="mark"><use href="#mark"/></svg>ClerkNova</a>
+  <span class="fl">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="mailto:support@clerknova.com">support@clerknova.com</a>
+  </span>
+  <div class="cr">© 2026 ClerkNova. AI sales &amp; support for e-commerce. All rights reserved.</div>
+</div></footer>
+
 </body>
 </html>
