@@ -1,7 +1,9 @@
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { NovaMark } from "../components/NovaMark";
 import { SiteNav } from "../components/SiteNav";
 import { SiteFooter } from "../components/SiteFooter";
+import { useReveal } from "../hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -15,14 +17,13 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ClerkNova — AI Sales & Support for E-commerce" },
       {
         property: "og:description",
-        content:
-          "The AI employee that sells, supports, and answers the phone for your Shopify store.",
+        content: "The AI employee that sells, supports, and answers the phone for your Shopify store.",
       },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ClerkNova — AI Sales & Support for E-commerce" },
       {
         name: "twitter:description",
-        content:
-          "The AI employee that sells, supports, and answers the phone for your Shopify store.",
+        content: "The AI employee that sells, supports, and answers the phone for your Shopify store.",
       },
     ],
   }),
@@ -34,11 +35,8 @@ export const Route = createFileRoute("/")({
 function IconTile({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-[#fffdfa] shadow-[0_10px_30px_-12px_rgba(185,137,91,0.7)]"
-      style={{
-        background:
-          "linear-gradient(135deg, #d1a479 0%, #b9895b 55%, #9a6f45 100%)",
-      }}
+      className="grid h-12 w-12 shrink-0 place-items-center rounded-xl text-[#fffdfa] shadow-[0_10px_30px_-12px_rgba(185,137,91,0.7)] transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+      style={{ background: "linear-gradient(135deg, #d1a479 0%, #b9895b 55%, #9a6f45 100%)" }}
     >
       {children}
     </div>
@@ -55,10 +53,7 @@ const ChartIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...str
 const LeadIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...stroke}><path d="M12 3 4 8v6c0 4 3.5 6.5 8 7 4.5-.5 8-3 8-7V8Z"/><path d="m9 12 2 2 4-4"/></svg>);
 
 const Check = () => (
-  <span
-    className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full"
-    style={{ background: "#b9895b" }}
-  >
+  <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full" style={{ background: "#b9895b" }}>
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#16130f" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
       <path d="m5 12 5 5L20 7" />
     </svg>
@@ -68,78 +63,102 @@ const Check = () => (
 /* ---------------------------------- Page --------------------------------- */
 
 function HomePage() {
+  useReveal();
+
   return (
     <div className="min-h-screen bg-[#fffdfa] text-[#16130f]">
       <SiteNav />
 
       {/* HERO */}
       <section className="relative overflow-hidden bg-[#16130f] text-[#f6f1e9]">
-        {/* radial glow */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(60% 50% at 50% 20%, rgba(185,137,91,0.22) 0%, rgba(185,137,91,0.05) 40%, transparent 70%)",
-          }}
-        />
+        {/* aurora blobs */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div
+            className="absolute -top-40 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full blur-3xl aurora"
+            style={{ background: "radial-gradient(circle, rgba(185,137,91,0.35), transparent 70%)" }}
+          />
+          <div
+            className="absolute top-1/3 -left-40 h-[420px] w-[420px] rounded-full blur-3xl aurora"
+            style={{ background: "radial-gradient(circle, rgba(209,164,121,0.22), transparent 70%)", animationDelay: "-6s" }}
+          />
+          <div
+            className="absolute bottom-0 -right-32 h-[460px] w-[460px] rounded-full blur-3xl aurora"
+            style={{ background: "radial-gradient(circle, rgba(154,111,69,0.28), transparent 70%)", animationDelay: "-12s" }}
+          />
+        </div>
+
         {/* ghosted nova */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 nova-rotate"
-          style={{ opacity: 0.06 }}
+          style={{ opacity: 0.07 }}
         >
-          <NovaMark size={900} dotCount={260} />
+          <NovaMark size={900} />
         </div>
 
         <div className="relative mx-auto max-w-5xl px-6 pt-24 pb-28 md:pt-32 md:pb-36 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-xs font-medium text-[#d1a479] backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#b9895b]" />
+          <span
+            className="fade-up inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs font-medium text-[#d1a479] backdrop-blur"
+            style={{ animationDelay: "0.05s" }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#b9895b] blink" />
             AI Sales &amp; Support for E-commerce
           </span>
 
           <h1 className="mt-7 text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            The AI employee that{" "}
-            <span className="text-[#b9895b]">sells, supports</span> &amp; answers the phone
+            <span className="fade-up inline-block" style={{ animationDelay: "0.1s" }}>The AI employee that</span>{" "}
+            <span className="fade-up inline-block shimmer-text" style={{ animationDelay: "0.25s" }}>sells, supports</span>{" "}
+            <span className="fade-up inline-block" style={{ animationDelay: "0.4s" }}>&amp; answers the phone</span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-[#b9ad9d] md:text-xl">
+          <p className="fade-up mx-auto mt-6 max-w-2xl text-lg text-[#b9ad9d] md:text-xl" style={{ animationDelay: "0.55s" }}>
             ClerkNova plugs into your Shopify store and works your website chat,
             WhatsApp, and real phone calls — recommending products, closing sales,
             and handling returns like your best team member.
           </p>
 
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+          <div className="fade-up mt-9 flex flex-wrap items-center justify-center gap-3" style={{ animationDelay: "0.7s" }}>
             <a
               href="#cta"
-              className="inline-flex items-center rounded-full bg-[#b9895b] px-6 py-3.5 text-sm font-semibold text-[#16130f] transition-all hover:bg-[#d1a479] hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-15px_rgba(185,137,91,0.8)]"
+              className="inline-flex items-center rounded-full bg-[#b9895b] px-6 py-3.5 text-sm font-semibold text-[#16130f] transition-all duration-300 hover:bg-[#d1a479] hover:-translate-y-0.5 glow-pulse"
             >
               Request early access
             </a>
             <a
               href="#how"
-              className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-6 py-3.5 text-sm font-semibold text-[#f6f1e9] transition-colors hover:bg-white/[0.06]"
+              className="inline-flex items-center rounded-full border border-white/15 bg-white/[0.02] px-6 py-3.5 text-sm font-semibold text-[#f6f1e9] transition-all duration-300 hover:bg-white/[0.08] hover:-translate-y-0.5"
             >
-              See how it works
+              See how it works →
             </a>
           </div>
 
-          <p className="mt-8 text-xs text-[#6b6156]">
+          <p className="fade-up mt-8 text-xs text-[#6b6156]" style={{ animationDelay: "0.85s" }}>
             Currently onboarding early partner stores · No code · Live in minutes
           </p>
         </div>
 
-        {/* channel strip */}
-        <div className="relative border-t border-white/5 bg-[#211c17]">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-x-8 gap-y-3 px-6 py-5 text-xs uppercase tracking-[0.18em] text-[#b9ad9d] md:text-sm">
-            <span className="text-[#6b6156]">Works across</span>
-            <span>Website chat</span>
-            <span className="text-[#b9895b]">·</span>
-            <span>WhatsApp</span>
-            <span className="text-[#b9895b]">·</span>
-            <span>Phone calls</span>
-            <span className="text-[#b9895b]">·</span>
-            <span>Profit dashboard</span>
+        {/* marquee channel strip */}
+        <div className="relative border-t border-white/5 bg-[#211c17] overflow-hidden">
+          <div className="flex marquee whitespace-nowrap py-5 text-xs uppercase tracking-[0.22em] text-[#b9ad9d] md:text-sm">
+            {Array.from({ length: 2 }).map((_, dup) => (
+              <div key={dup} className="flex shrink-0 items-center gap-10 pr-10">
+                {[
+                  "Website chat",
+                  "WhatsApp Business",
+                  "Phone calls (voice AI)",
+                  "Shopify orders",
+                  "Return automation",
+                  "Profit dashboard",
+                  "Abandoned cart recovery",
+                  "24/7 coverage",
+                ].map((s) => (
+                  <span key={s + dup} className="flex items-center gap-10">
+                    <span>{s}</span>
+                    <span className="text-[#b9895b]">✦</span>
+                  </span>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -147,10 +166,8 @@ function HomePage() {
       {/* FEATURES */}
       <section id="features" className="bg-[#fffdfa] py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">
-              Features
-            </p>
+          <div className="max-w-2xl reveal">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">Features</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
               One AI agent doing the work of a whole team
             </h2>
@@ -168,11 +185,17 @@ function HomePage() {
               { i: <ReturnIcon />, t: "Handles returns by the book", d: "Follows your policy line by line — approves, rejects, or asks for details. No angry tickets in your inbox." },
               { i: <ChartIcon />, t: "Shows the profit it makes", d: "A profit dashboard that ties every conversation to real revenue. Know exactly what ClerkNova earned this week." },
               { i: <LeadIcon />, t: "Captures leads & recovers carts", d: "Follows up on abandoned carts across channels and turns curious visitors into buyers with the right nudge." },
-            ].map((f) => (
+            ].map((f, i) => (
               <div
                 key={f.t}
-                className="group rounded-2xl border border-[#16130f]/8 bg-[#fffdfa] p-7 transition-all hover:-translate-y-1 hover:border-[#b9895b]/40 hover:shadow-[0_20px_50px_-25px_rgba(22,19,15,0.25)]"
+                className="reveal group relative overflow-hidden rounded-2xl border border-[#16130f]/8 bg-[#fffdfa] p-7 transition-all duration-500 hover:-translate-y-1.5 hover:border-[#b9895b]/50 hover:shadow-[0_25px_60px_-25px_rgba(22,19,15,0.3)]"
+                style={{ transitionDelay: `${i * 60}ms` }}
               >
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-500 group-hover:opacity-100"
+                  style={{ background: "radial-gradient(circle, rgba(185,137,91,0.35), transparent 70%)" }}
+                />
                 <IconTile>{f.i}</IconTile>
                 <h3 className="mt-5 text-lg font-bold tracking-tight">{f.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#6b6156]">{f.d}</p>
@@ -185,10 +208,8 @@ function HomePage() {
       {/* WHY */}
       <section id="why" className="bg-[#f6f1e9] py-24 md:py-32">
         <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2 lg:gap-20">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">
-              Why ClerkNova
-            </p>
+          <div className="reveal">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">Why ClerkNova</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
               An AI store employee — not a chatbot that charges per answer
             </h2>
@@ -203,8 +224,8 @@ function HomePage() {
                 ["Native WhatsApp commerce", "Product cards, order updates, and payment links right inside WhatsApp."],
                 ["Profit intelligence", "Every reply tied to revenue and margin. See exactly what it earned."],
                 ["Acts on your real store", "Reads live inventory, prices, and orders — never invents products."],
-              ].map(([t, d]) => (
-                <li key={t} className="flex items-start gap-3">
+              ].map(([t, d], i) => (
+                <li key={t} className="reveal flex items-start gap-3" style={{ transitionDelay: `${i * 90}ms` }}>
                   <Check />
                   <div>
                     <p className="font-semibold text-[#16130f]">{t}</p>
@@ -215,48 +236,18 @@ function HomePage() {
             </ul>
           </div>
 
-          {/* Chat mock */}
-          <div className="rounded-3xl bg-[#16130f] p-6 text-[#f6f1e9] shadow-[0_40px_80px_-30px_rgba(22,19,15,0.5)] md:p-8">
-            <div className="flex items-center gap-2.5 border-b border-white/5 pb-4">
-              <NovaMark size={22} />
-              <span className="text-sm font-semibold">ClerkNova · Live chat</span>
-              <span className="ml-auto flex items-center gap-1.5 text-xs text-[#b9ad9d]">
-                <span className="h-2 w-2 rounded-full bg-[#b9895b]" /> Online
-              </span>
-            </div>
-
-            <div className="mt-5 space-y-4 text-sm">
-              <Bubble who="them">
-                Hey — looking for an all-mountain snowboard, size 156. Under $600 ideally.
-              </Bubble>
-              <Bubble who="us">
-                Got you. Based on your height and what's in stock, here are two solid picks:
-              </Bubble>
-
-              <div className="grid gap-3 sm:grid-cols-2">
-                <ProductCard name="Aurora All-Mountain 156" price="$549" tag="In stock" />
-                <ProductCard name="Ember Freeride 156" price="$589" tag="2 left" />
-              </div>
-
-              <Bubble who="them">The Aurora, please. Ship to Denver?</Bubble>
-              <Bubble who="us">
-                Perfect choice. Free 2-day shipping to Denver. Here's your checkout —
-                <a className="ml-1 text-[#d1a479] underline underline-offset-2" href="#">
-                  clerknova.shop/co/aurora-156
-                </a>
-              </Bubble>
-            </div>
-          </div>
+          <LiveChatMock />
         </div>
       </section>
+
+      {/* PROFIT DASHBOARD */}
+      <ProfitSection />
 
       {/* HOW */}
       <section id="how" className="bg-[#fffdfa] py-24 md:py-32">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">
-              How it works
-            </p>
+          <div className="max-w-2xl reveal">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">How it works</p>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
               Live in minutes. No flow-builder required.
             </h2>
@@ -267,16 +258,21 @@ function HomePage() {
               ["01", "Install & connect", "One-click Shopify install. ClerkNova reads your products, policies, and past orders."],
               ["02", "Connect WhatsApp", "Link your business number with a single click. Meta-verified in the same flow."],
               ["03", "Set your rules", "Tell it your voice, your return policy, and what it can promise. That's it."],
-            ].map(([n, t, d]) => (
+            ].map(([n, t, d], i) => (
               <div
                 key={n}
-                className="rounded-2xl border-l-4 border-[#b9895b] bg-[#f6f1e9]/40 py-7 pl-6 pr-6 transition-colors hover:bg-[#f6f1e9]"
+                className="reveal group relative rounded-2xl border-l-4 border-[#b9895b] bg-[#f6f1e9]/40 py-7 pl-6 pr-6 transition-all duration-500 hover:bg-[#f6f1e9] hover:-translate-y-1"
+                style={{ transitionDelay: `${i * 120}ms` }}
               >
-                <span className="text-sm font-bold tracking-[0.2em] text-[#b9895b]">
-                  STEP {n}
-                </span>
+                <span className="text-sm font-bold tracking-[0.2em] text-[#b9895b]">STEP {n}</span>
                 <h3 className="mt-3 text-xl font-bold tracking-tight">{t}</h3>
                 <p className="mt-2 text-sm text-[#6b6156]">{d}</p>
+                <span
+                  aria-hidden
+                  className="absolute right-5 top-5 text-4xl font-black text-[#b9895b]/10 transition-all duration-500 group-hover:text-[#b9895b]/25 group-hover:scale-110"
+                >
+                  {n}
+                </span>
               </div>
             ))}
           </div>
@@ -291,9 +287,9 @@ function HomePage() {
             ["24/7", "always on"],
             ["<5 min", "to go live"],
             ["0", "flows to build by hand"],
-          ].map(([n, l]) => (
-            <div key={l} className="text-center md:text-left">
-              <div className="text-4xl font-extrabold tracking-tight text-[#b9895b] md:text-5xl">
+          ].map(([n, l], i) => (
+            <div key={l} className="reveal text-center md:text-left" style={{ transitionDelay: `${i * 100}ms` }}>
+              <div className="text-4xl font-extrabold tracking-tight text-[#b9895b] md:text-5xl shimmer-text">
                 {n}
               </div>
               <div className="mt-2 text-sm text-[#6b6156]">{l}</div>
@@ -302,26 +298,63 @@ function HomePage() {
         </div>
       </section>
 
+      {/* TESTIMONIALS marquee */}
+      <section className="bg-[#fffdfa] py-24">
+        <div className="mx-auto max-w-6xl px-6">
+          <div className="max-w-2xl reveal">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">From the pilots</p>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              Early stores. Real revenue.
+            </h2>
+          </div>
+        </div>
+        <div className="relative mt-10 overflow-hidden">
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#fffdfa] to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#fffdfa] to-transparent" />
+          <div className="flex marquee-fast whitespace-nowrap gap-6">
+            {Array.from({ length: 2 }).map((_, dup) => (
+              <div key={dup} className="flex shrink-0 gap-6">
+                {[
+                  ["Aurora Boards", "\"ClerkNova closed 38 sales on WhatsApp in its first week. Our team hasn't answered a single tracking DM since.\""],
+                  ["Ember Coffee Co.", "\"It picks up the phone at 2am and takes wholesale orders. That is not a chatbot — that is an employee.\""],
+                  ["Northwind Apparel", "\"Return tickets down 71%. And I finally know which conversations actually make money.\""],
+                  ["Solace Skincare", "\"Recommends the right product every time. Our AOV went up $14 in a month.\""],
+                ].map(([name, quote], i) => (
+                  <figure
+                    key={name + dup}
+                    className="w-[360px] shrink-0 rounded-2xl border border-[#16130f]/8 bg-[#f6f1e9]/50 p-6 whitespace-normal"
+                    style={{ animationDelay: `${i * 100}ms` }}
+                  >
+                    <blockquote className="text-sm leading-relaxed text-[#16130f]">{quote}</blockquote>
+                    <figcaption className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#b9895b]">
+                      <span className="h-1 w-6 rounded-full bg-[#b9895b]" /> {name}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CLOSING CTA */}
       <section id="cta" className="relative overflow-hidden bg-[#16130f] py-28 text-[#f6f1e9] md:py-36">
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 nova-rotate"
-          style={{ opacity: 0.07 }}
+          style={{ opacity: 0.09 }}
         >
-          <NovaMark size={780} dotCount={220} />
+          <NovaMark size={780} />
         </div>
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(50% 50% at 50% 50%, rgba(185,137,91,0.2) 0%, transparent 70%)",
-          }}
+          className="pointer-events-none absolute inset-0 aurora"
+          style={{ background: "radial-gradient(50% 50% at 50% 50%, rgba(185,137,91,0.25) 0%, transparent 70%)" }}
         />
-        <div className="relative mx-auto max-w-3xl px-6 text-center">
+        <div className="relative mx-auto max-w-3xl px-6 text-center reveal">
           <h2 className="text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
-            Give every store the team only giants could afford
+            Give every store the team{" "}
+            <span className="shimmer-text">only giants</span> could afford
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-[#b9ad9d]">
             Join the early partner stores using ClerkNova to sell, support, and
@@ -330,9 +363,9 @@ function HomePage() {
           <div className="mt-10">
             <a
               href="mailto:support@clerknova.com?subject=Early%20access"
-              className="inline-flex items-center rounded-full bg-[#b9895b] px-7 py-4 text-sm font-semibold text-[#16130f] transition-all hover:bg-[#d1a479] hover:-translate-y-0.5 hover:shadow-[0_20px_50px_-15px_rgba(185,137,91,0.8)]"
+              className="inline-flex items-center rounded-full bg-[#b9895b] px-7 py-4 text-sm font-semibold text-[#16130f] transition-all duration-300 hover:bg-[#d1a479] hover:-translate-y-0.5 glow-pulse"
             >
-              Request early access
+              Request early access →
             </a>
           </div>
         </div>
@@ -345,16 +378,76 @@ function HomePage() {
 
 /* ------------------------------- Sub-parts ------------------------------- */
 
+const CHAT_SCRIPT = [
+  { who: "them" as const, text: "Hey — looking for an all-mountain snowboard, size 156. Under $600 ideally." },
+  { who: "us" as const, text: "Got you. Based on your height and what's in stock, here are two solid picks:" },
+  { who: "cards" as const, text: "" },
+  { who: "them" as const, text: "The Aurora, please. Ship to Denver?" },
+  { who: "us" as const, text: "Perfect choice. Free 2-day shipping to Denver. Here's your checkout — clerknova.shop/co/aurora-156" },
+];
+
+function LiveChatMock() {
+  const [step, setStep] = useState(1);
+  useEffect(() => {
+    if (step >= CHAT_SCRIPT.length) return;
+    const t = setTimeout(() => setStep((s) => s + 1), 1500);
+    return () => clearTimeout(t);
+  }, [step]);
+
+  return (
+    <div className="reveal rounded-3xl bg-[#16130f] p-6 text-[#f6f1e9] shadow-[0_40px_80px_-30px_rgba(22,19,15,0.5)] md:p-8">
+      <div className="flex items-center gap-2.5 border-b border-white/5 pb-4">
+        <span className="nova-rotate"><NovaMark size={22} /></span>
+        <span className="text-sm font-semibold">ClerkNova · Live chat</span>
+        <span className="ml-auto flex items-center gap-1.5 text-xs text-[#b9ad9d]">
+          <span className="h-2 w-2 rounded-full bg-[#b9895b] blink" /> Online
+        </span>
+      </div>
+
+      <div className="mt-5 space-y-4 text-sm min-h-[340px]">
+        {CHAT_SCRIPT.slice(0, step).map((m, idx) => {
+          if (m.who === "cards") {
+            return (
+              <div key={idx} className="bubble-in grid gap-3 sm:grid-cols-2">
+                <ProductCard name="Aurora All-Mountain 156" price="$549" tag="In stock" />
+                <ProductCard name="Ember Freeride 156" price="$589" tag="2 left" />
+              </div>
+            );
+          }
+          return <Bubble key={idx} who={m.who}>{m.text}</Bubble>;
+        })}
+        {step < CHAT_SCRIPT.length && <TypingDots />}
+      </div>
+      <button
+        onClick={() => setStep(1)}
+        className="mt-4 text-xs text-[#d1a479] hover:text-[#f6d8b5] transition-colors"
+      >
+        ↻ Replay conversation
+      </button>
+    </div>
+  );
+}
+
+function TypingDots() {
+  return (
+    <div className="flex justify-end">
+      <div className="flex items-center gap-1 rounded-2xl rounded-tr-sm bg-white/[0.06] px-3 py-2.5">
+        <span className="h-1.5 w-1.5 rounded-full bg-[#b9ad9d] blink" style={{ animationDelay: "0s" }} />
+        <span className="h-1.5 w-1.5 rounded-full bg-[#b9ad9d] blink" style={{ animationDelay: "0.2s" }} />
+        <span className="h-1.5 w-1.5 rounded-full bg-[#b9ad9d] blink" style={{ animationDelay: "0.4s" }} />
+      </div>
+    </div>
+  );
+}
+
 function Bubble({ who, children }: { who: "us" | "them"; children: React.ReactNode }) {
   const mine = who === "us";
   return (
     <div className={mine ? "flex justify-start" : "flex justify-end"}>
       <div
         className={
-          "max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed " +
-          (mine
-            ? "bg-[#b9895b]/15 text-[#f6f1e9] rounded-tl-sm"
-            : "bg-white/[0.06] text-[#f6f1e9] rounded-tr-sm")
+          "bubble-in max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed " +
+          (mine ? "bg-[#b9895b]/15 text-[#f6f1e9] rounded-tl-sm" : "bg-white/[0.06] text-[#f6f1e9] rounded-tr-sm")
         }
       >
         {children}
@@ -365,13 +458,10 @@ function Bubble({ who, children }: { who: "us" | "them"; children: React.ReactNo
 
 function ProductCard({ name, price, tag }: { name: string; price: string; tag: string }) {
   return (
-    <div className="rounded-xl border border-white/10 bg-[#211c17] p-3">
+    <div className="group rounded-xl border border-white/10 bg-[#211c17] p-3 transition-all duration-300 hover:border-[#b9895b]/60 hover:-translate-y-0.5">
       <div
-        className="mb-3 h-20 rounded-lg"
-        style={{
-          background:
-            "linear-gradient(135deg, rgba(209,164,121,0.35), rgba(154,111,69,0.2))",
-        }}
+        className="mb-3 h-20 rounded-lg transition-transform duration-500 group-hover:scale-[1.02]"
+        style={{ background: "linear-gradient(135deg, rgba(209,164,121,0.35), rgba(154,111,69,0.2))" }}
       />
       <p className="text-xs font-semibold text-[#f6f1e9]">{name}</p>
       <div className="mt-1 flex items-center justify-between">
@@ -379,5 +469,86 @@ function ProductCard({ name, price, tag }: { name: string; price: string; tag: s
         <span className="text-[10px] uppercase tracking-wider text-[#b9ad9d]">{tag}</span>
       </div>
     </div>
+  );
+}
+
+/* ------------------------------ Profit Section ---------------------------- */
+
+function ProfitSection() {
+  const bars = useMemo(() => [42, 58, 34, 71, 65, 88, 96], []);
+  const days = ["M", "T", "W", "T", "F", "S", "S"];
+
+  return (
+    <section className="bg-[#fffdfa] py-24 md:py-32">
+      <div className="mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2 lg:items-center lg:gap-20">
+        {/* Dashboard mock */}
+        <div className="reveal order-2 lg:order-1">
+          <div className="relative rounded-3xl border border-[#16130f]/8 bg-[#16130f] p-6 text-[#f6f1e9] shadow-[0_40px_80px_-30px_rgba(22,19,15,0.4)] md:p-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs uppercase tracking-[0.2em] text-[#b9ad9d]">Revenue by ClerkNova · 7d</p>
+                <p className="mt-2 text-3xl font-extrabold tracking-tight shimmer-text">$18,420</p>
+              </div>
+              <span className="rounded-full bg-[#b9895b]/15 px-3 py-1 text-xs font-semibold text-[#d1a479]">
+                +38% WoW
+              </span>
+            </div>
+
+            <div className="mt-8 flex h-40 items-end gap-3">
+              {bars.map((h, i) => (
+                <div key={i} className="flex flex-1 flex-col items-center gap-2">
+                  <div
+                    className="w-full rounded-t-md bar-grow"
+                    style={{
+                      height: `${h}%`,
+                      background: "linear-gradient(180deg, #d1a479 0%, #b9895b 60%, #9a6f45 100%)",
+                      animationDelay: `${i * 90}ms`,
+                    }}
+                  />
+                  <span className="text-[10px] text-[#6b6156]">{days[i]}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 grid grid-cols-3 gap-3 border-t border-white/5 pt-6">
+              {[
+                ["Chats → sale", "27%"],
+                ["Calls answered", "142"],
+                ["Cart recovered", "$3.1k"],
+              ].map(([k, v]) => (
+                <div key={k} className="rounded-xl bg-white/[0.03] p-3">
+                  <p className="text-[10px] uppercase tracking-wider text-[#b9ad9d]">{k}</p>
+                  <p className="mt-1 text-sm font-bold text-[#f6f1e9]">{v}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="reveal order-1 lg:order-2">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#b9895b]">Profit dashboard</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl">
+            Finally — an AI that shows what it{" "}
+            <span className="shimmer-text">actually earned</span>.
+          </h2>
+          <p className="mt-5 text-lg text-[#6b6156]">
+            Every conversation tied to a real order, a real refund saved, a real
+            cart recovered. Open the dashboard on Monday morning and see the
+            week your AI employee had.
+          </p>
+          <ul className="mt-6 space-y-3 text-sm text-[#16130f]">
+            {[
+              "Revenue attributed per channel — chat, WhatsApp, phone",
+              "Margin-aware: knows what a discount actually costs you",
+              "Weekly digest emailed to you every Monday",
+            ].map((s) => (
+              <li key={s} className="flex items-start gap-3">
+                <Check /> <span>{s}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
