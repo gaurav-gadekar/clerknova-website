@@ -14,16 +14,16 @@ export const Route = createFileRoute("/")({
         content:
           "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
       },
-      { property: "og:title", content: "ClerkNova — AI Sales & Support for E-commerce" },
+      { property: "og:title", content: "ClerkNova — The AI employee that sells, supports & answers the phone" },
       {
         property: "og:description",
-        content: "The AI employee that sells, supports, and answers the phone for your Shopify store.",
+        content: "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "ClerkNova — AI Sales & Support for E-commerce" },
+      { name: "twitter:title", content: "ClerkNova — The AI employee that sells, supports & answers the phone" },
       {
         name: "twitter:description",
-        content: "The AI employee that sells, supports, and answers the phone for your Shopify store.",
+        content: "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
       },
     ],
   }),
