@@ -355,8 +355,8 @@ function HomePage() {
           }}
         />
         <div className="relative mx-auto max-w-3xl px-6 text-center reveal">
-          <div className="mx-auto mb-6 grid h-14 w-14 place-items-center rounded-2xl bg-[#16130f]">
-            <NovaMark size={30} />
+          <div className="mx-auto mb-6 grid h-16 w-16 place-items-center rounded-2xl bg-[#16130f]">
+            <NovaMark size={40} variant="white" />
           </div>
           <h2 className="text-4xl font-extrabold leading-[1.05] tracking-tight md:text-6xl">
             Give every store the team{" "}
