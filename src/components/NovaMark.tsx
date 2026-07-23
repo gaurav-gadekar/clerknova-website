@@ -1,18 +1,24 @@
-import markAsset from "@/assets/clerknova-mark.png.asset.json";
+import copperMark from "@/assets/clerknova-mark-copper.png.asset.json";
+import blackMark from "@/assets/clerknova-mark-black.png.asset.json";
+import whiteMark from "@/assets/clerknova-mark-white.png.asset.json";
 
 type Props = {
   size?: number;
   className?: string;
-  color?: string;
-  dotCount?: number;
+  variant?: "copper" | "black" | "white";
   opacity?: number;
 };
 
-// ClerkNova mark — uses the uploaded brand logo image.
-export function NovaMark({ size = 36, className, opacity = 1 }: Props) {
+const SRC = {
+  copper: copperMark.url,
+  black: blackMark.url,
+  white: whiteMark.url,
+};
+
+export function NovaMark({ size = 36, className, variant = "copper", opacity = 1 }: Props) {
   return (
     <img
-      src={markAsset.url}
+      src={SRC[variant]}
       alt=""
       aria-hidden="true"
       width={size}

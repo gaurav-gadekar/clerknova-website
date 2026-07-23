@@ -22,9 +22,7 @@ export function SiteNav() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2.5 group">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-[#16130f] transition-transform duration-500 group-hover:rotate-12">
-            <NovaMark size={22} />
-          </span>
+          <NovaMark size={36} variant="copper" className="transition-transform duration-500 group-hover:rotate-12" />
           <span className="text-[#16130f] font-bold text-lg tracking-tight">
             ClerkNova
           </span>
