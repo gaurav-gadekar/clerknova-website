@@ -6,9 +6,7 @@ export function SiteFooter() {
     <footer className="bg-[#f6f1e9] border-t border-[#16130f]/8">
       <div className="mx-auto max-w-7xl px-6 py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#16130f]">
-            <NovaMark size={20} />
-          </span>
+          <NovaMark size={28} variant="copper" />
           <span className="text-[#16130f] font-bold tracking-tight">ClerkNova</span>
         </Link>
         <nav className="flex flex-wrap items-center gap-6 text-sm text-[#6b6156]">
