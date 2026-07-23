@@ -410,8 +410,8 @@ function LiveChatMock() {
     <div className="relative rounded-[2rem] border border-[#16130f]/8 bg-[#fffdfa] p-4 shadow-[0_40px_80px_-30px_rgba(22,19,15,0.25)] md:p-5">
       {/* header */}
       <div className="flex items-center gap-2.5 rounded-2xl bg-[#f6f1e9]/70 px-4 py-3">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-[#16130f]">
-          <NovaMark size={18} />
+        <span className="grid h-9 w-9 place-items-center rounded-lg bg-[#16130f]">
+          <NovaMark size={24} variant="white" />
         </span>
         <div className="flex flex-col leading-tight">
           <span className="text-sm font-semibold text-[#16130f]">ClerkNova</span>
