@@ -27,3 +27,17 @@ npm run dev
 - TypeScript
 - React
 - Tailwind CSS
+
+## Deployment (clerknova.com)
+
+Hosted on the Oracle Cloud VM, served by Nginx in front of a Node process.
+
+```bash
+NITRO_PRESET=node-server npm run build    # -> .output (self-contained, ~1.6MB)
+# ship .output to the server, then:
+sudo systemctl restart clerknova-site
+```
+
+- Site process: `clerknova-site.service` on 127.0.0.1:3000
+- Nginx vhost `clerknova-web` proxies clerknova.com -> :3000 (TLS via Let's Encrypt)
+- Backend API is a separate project/repo at api.clerknova.com
