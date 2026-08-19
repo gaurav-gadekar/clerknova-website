@@ -1,0 +1,9 @@
+# clerknova.com
+# There was no robots.txt at all before this — the URL returned 404, which
+# search engines read as "crawl anything". That works, but it also meant there
+# was nowhere to point them at the sitemap.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://clerknova.com/sitemap.xml

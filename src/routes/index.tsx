@@ -12,18 +12,18 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
+          "ClerkNova is an AI sales and support agent for Shopify. It finds products from a plain description or a photo, adds them to the customer's cart inside the chat, and answers questions on orders, delivery and returns — on your website, WhatsApp and the phone.",
       },
       { property: "og:title", content: "ClerkNova — The AI employee that sells, supports & answers the phone" },
       {
         property: "og:description",
-        content: "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
+        content: "ClerkNova is an AI sales and support agent for Shopify. It finds products from a plain description or a photo, adds them to the customer's cart inside the chat, and answers questions on orders, delivery and returns — on your website, WhatsApp and the phone.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "ClerkNova — The AI employee that sells, supports & answers the phone" },
       {
         name: "twitter:description",
-        content: "ClerkNova is an AI sales & support agent for Shopify. It works website chat, WhatsApp, and phone calls — recommends products, closes sales, handles returns, and shows the profit it makes.",
+        content: "ClerkNova is an AI sales and support agent for Shopify. It finds products from a plain description or a photo, adds them to the customer's cart inside the chat, and answers questions on orders, delivery and returns — on your website, WhatsApp and the phone.",
       },
     ],
   }),
@@ -40,6 +40,7 @@ const stroke = {
   fill: "none",
 };
 
+const SearchIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...stroke}><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>);
 const CartIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...stroke}><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>);
 const ChatIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...stroke}><path d="M21 12a8 8 0 1 1-3.2-6.4L21 4l-1 4a8 8 0 0 1 1 4Z"/></svg>);
 const PhoneIcon = () => (<svg width="22" height="22" viewBox="0 0 24 24" {...stroke}><path d="M5 4h3l2 5-2.5 1.5a12 12 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>);
@@ -185,10 +186,11 @@ function HomePage() {
 
           <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { i: <CartIcon />, t: "Sells on your storefront", d: "Recommends the right product, answers questions, and drops a checkout link — right inside the chat." },
+              { i: <CartIcon />, t: "Sells on your storefront", d: "Finds the right product, answers questions about it, and adds it to the customer's cart — size and colour picked, without leaving the chat." },
               { i: <ChatIcon />, t: "Runs your WhatsApp shop", d: "Native WhatsApp commerce with product cards, order tracking, and pay-in-chat that customers actually use." },
               { i: <PhoneIcon />, t: "Answers the phone like a human", d: "Real voice calls, real conversations. Places orders, answers questions, escalates cleanly when needed." },
               { i: <ReturnIcon />, t: "Handles returns by the book", d: "Follows your policy line by line — approves, rejects, or asks for details. No angry tickets in your inbox." },
+              { i: <SearchIcon />, t: "Finds it from a description", d: "\"Black oversized hoodie with a racing graphic.\" ClerkNova reads your product photos, so it finds things your descriptions never mentioned. Customers can send a photo too." },
               { i: <ChartIcon />, t: "Shows the profit it makes", d: "A profit dashboard that ties every conversation to real revenue. Know exactly what ClerkNova earned this week." },
               { i: <LeadIcon />, t: "Captures leads & recovers carts", d: "Follows up on abandoned carts across channels and turns curious visitors into buyers with the right nudge." },
             ].map((f, i) => (
@@ -394,8 +396,8 @@ const CHAT_SCRIPT = [
   { who: "them" as const, text: "Hey — looking for an all-mountain snowboard, size 156. Under $600?" },
   { who: "us" as const, text: "Got you. Based on your height and what's in stock, two solid picks:" },
   { who: "cards" as const, text: "" },
-  { who: "them" as const, text: "The Aurora, please. Ship to Denver?" },
-  { who: "us" as const, text: "Perfect. Free 2-day shipping to Denver — here's your checkout." },
+  { who: "them" as const, text: "The Aurora, please. Do you have it in the blue?" },
+  { who: "us" as const, text: "We do — blue, 156. Added to your cart, ready when you are." },
 ];
 
 function LiveChatMock() {
@@ -442,7 +444,7 @@ function LiveChatMock() {
               href="#cta"
               className="mt-1 inline-flex items-center gap-2 rounded-full bg-[#b9895b] px-4 py-2 text-xs font-semibold text-[#16130f] transition-colors hover:bg-[#d1a479]"
             >
-              Open checkout · $549 →
+              Added to cart · $549
             </a>
           </div>
         )}
