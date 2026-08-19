@@ -41,3 +41,15 @@ sudo systemctl restart clerknova-site
 - Site process: `clerknova-site.service` on 127.0.0.1:3000
 - Nginx vhost `clerknova-web` proxies clerknova.com -> :3000 (TLS via Let's Encrypt)
 - Backend API is a separate project/repo at api.clerknova.com
+
+### Brand assets
+
+The mark lives in `public/brand/` and is served from our own domain. It used to
+be three `.asset.json` pointer files whose url was a Lovable preview path
+(`/__l5e/assets-v1/...`); that path only exists on Lovable's host, so on
+clerknova.com every logo 404'd and the nav, footer and chat mock-up showed a
+broken image. The same applied to `og:image`, which pointed at a `lovable.app`
+screenshot — which is what search results and shared links were showing.
+
+Replacing a logo means replacing the PNGs in `public/brand/` and rebuilding.
+Keep them small: the originals were 1536x1024 and 2 MB each, displayed at 44px.

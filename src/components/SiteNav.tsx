@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { NovaMark } from "./NovaMark";
+import { ComingSoonBar } from "./ComingSoonBar";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
@@ -12,6 +13,8 @@ export function SiteNav() {
   }, []);
 
   return (
+    <>
+    <ComingSoonBar />
     <header
       className={
         "sticky top-0 z-50 transition-all duration-300 " +
@@ -50,5 +53,6 @@ export function SiteNav() {
         </a>
       </div>
     </header>
+    </>
   );
 }
