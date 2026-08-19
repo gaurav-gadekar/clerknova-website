@@ -99,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/favicon.ico", sizes: "any" },
       // Google Search reads /favicon.ico; browsers and phones prefer these.
-      { rel: "icon", href: "/brand/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { rel: "icon", href: "/brand/favicon-48.png", type: "image/png", sizes: "48x48" },
       { rel: "icon", href: "/brand/favicon-192.png", type: "image/png", sizes: "192x192" },
       { rel: "apple-touch-icon", href: "/brand/apple-touch-icon.png", sizes: "180x180" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
